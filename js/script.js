@@ -32,8 +32,19 @@ function Task(taskName, taskTime, taskPerson, taskSupplies, taskLocation, taskDa
 
 //UI Logic
 
-function addToChecklist() {
-    document.createElement("form")
+function addToChecklist(name, date, person, supplies, location,) {
+    let inputForm = document.querySelector("inputform");
+    let newForm = document.createElement("form");
+    let label = document.createElement("label");
+    let checkbox = document.createElement("input");
+    let ul = document.createElement("ul");
+    newForm.setAttribute("id", name);
+    label.innerText() = name;
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("id", name + date);
+    ul.setAttribute
+    newForm.after(inputForm);
+
 }
 
 let list = new List();
