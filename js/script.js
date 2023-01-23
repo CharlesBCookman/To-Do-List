@@ -32,6 +32,28 @@ function Task(taskName, taskTime, taskPerson, taskSupplies, taskLocation, taskDa
 
 //UI Logic
 
+function addToChecklist() {
+    document.createElement("form")
+}
+
+let list = new List();
+
+function handleFormSubmission(event){
+    event.preventDefault();
+    const inputtedName = document.querySelector("#task-name").value;
+    const inputtedTime = document.querySelector("#time").value;
+    let inputtedPerson = document.querySelector("#assigned-to").value;
+    const inputtedSupplies= document.querySelector("#supplies").value;
+    const inputtedLocation = document.querySelector("#location").value;
+    const inputtedDueDate = document.querySelector("#due").value;
+    
+    let newTask = new Task(inputtedName, inputtedTime, inputtedPerson, inputtedSupplies, inputtedLocation, inputtedDueDate, false);
+    list.addTask(newTask);
+    console.log(list.tasks);
+    document.querySelector("#inputform").reset();
+}
+
 window.addEventListener("load", function(event){
     event.preventDefault()
+    document.querySelector("form#inputform").addEventListener("submit", handleFormSubmission)
 })
