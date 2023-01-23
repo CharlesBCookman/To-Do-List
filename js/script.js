@@ -1,3 +1,5 @@
+//Business Logic
+
 function List(){
     this.tasks = {};
 }
@@ -27,3 +29,9 @@ function Task(taskName, taskTime, taskPerson, taskSupplies, taskLocation, taskDa
     this.taskDate = taskDate;
     this.taskComplete = taskComplete
 }
+
+//UI Logic
+
+window.addEventListener("load", function(event){
+    event.preventDefault()
+})
