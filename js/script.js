@@ -33,7 +33,7 @@ function Task(taskName, taskTime, taskPerson, taskSupplies, taskLocation, taskDa
 //UI Logic
 
 function addToChecklist(name, time, person, supplies, location, due) {
-    let inputform = document.querySelector("#inputform");
+    let inputForm = document.querySelector("#inputform");
     let newForm = document.createElement("form");
     let label = document.createElement("label");
     let checkbox = document.createElement("input");
@@ -44,26 +44,44 @@ function addToChecklist(name, time, person, supplies, location, due) {
     let li4 = document.createElement("li");
     let li5 = document.createElement("li");
     let button = document.createElement("button");
+    button.innerHTML = "Reassign Person"
     let p = document.createElement("p");
     document.getElementById("inputform").append(p);
-    inputform.after(newForm);
+    inputForm.after(newForm);
     newForm.append(label);
     label.after(checkbox);
     checkbox.after(ul);
     ul.after(button);
-    li1.innerText = time + "minutes";
+    li1.innerText = time + " minutes";
     li2.innerText = person;
     li3.innerText = supplies;
     li4.innerText = location;
-    li5.innerText = "Due By:" + due;
+    li5.innerText = "Due By: " + due;
     ul.append(li1, li2, li3, li4, li5);
     newForm.setAttribute("id", name);
     label.innerText = name;
     label.setAttribute("for", name + due);
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("id", name + due);
-    
+    button.setAttribute("id", due + name);
+    button.setAttribute("type", "button");
+    console.log(checkbox.value)
+    // document.getElementById("#" + due + name).onclick = function(){
+    //     li2.innerText = window.prompt("Please input a new person");
+    //     }
 }
+
+function clearCompletedForm(){
+    let checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    checkedBoxes.forEach(element => { 
+        document.querySelector("#" + element.id).parentNode.remove();
+    });
+
+//    document.querySelector(checkedBoxes).remove();
+}
+
+
+
 let list = new List();
 
 function handleFormSubmission(event){
@@ -78,11 +96,13 @@ function handleFormSubmission(event){
     let newTask = new Task(inputtedName, inputtedTime, inputtedPerson, inputtedSupplies, inputtedLocation, inputtedDueDate, false);
     list.addTask(newTask);
     console.log(list.tasks);
-    //document.querySelector("#inputform").reset();
-    addToChecklist(inputtedName, inputtedTime, inputtedPerson, inputtedSupplies, inputtedLocation);
+    document.querySelector("#inputform").reset();
+    addToChecklist(inputtedName, inputtedTime, inputtedPerson, inputtedSupplies, inputtedLocation, inputtedDueDate);
 }
 
 window.addEventListener("load", function(event){
     event.preventDefault()
     document.querySelector("form#inputform").addEventListener("submit", handleFormSubmission)
+    const clearButton = document.querySelector("#clear-complete");
+    clearButton.addEventListener("click", clearCompletedForm);
 })
